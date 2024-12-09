@@ -1,27 +1,36 @@
 {
-  "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+    "compilerOptions": {
+        "target": "ES2017",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "src/app/(route)/admin/dashboard/add-employee/forms/basic-info.jsx",
+        "src/app/(route)/admin/dashboard/add-employee/forms/payment.jsx",
+        "src/app/(route)/admin/dashboard/add-employee/forms/position.jsx",
+        "src/app/(route)/admin/dashboard/add-employee/forms/statutory.jsx"
+, "src/app/(route)/admin/dashboard/view-employees/all-employees.jsx", "src/hooks/useFetchMisc.ts", "src/app/(route)/admin/dashboard/leave-mgmt/columns.jsx", "src/app/(route)/admin/dashboard/leave-mgmt/page.jsx"    ],
+    "exclude": ["node_modules"]
 }
