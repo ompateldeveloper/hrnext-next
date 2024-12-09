@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import Link from "next/link";
 import { instance } from "@/lib/axios";
 import { redirect, useRouter } from "next/navigation";
+import { useUserStore } from "@/store/userStore";
 
 const formSchema = z.object({
     fname: z.string().min(1, {
@@ -28,6 +29,8 @@ const formSchema = z.object({
 });
 
 export default function SignInForm() {
+    const router = useRouter();
+    const updateUserDetails = useUserStore((state) => state.updateUserDetails);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -43,14 +46,13 @@ export default function SignInForm() {
         instance
             .post("http://localhost:4000/api/v2/auth/signup", formData, { withCredentials: true })
             .then((res) => {
-                Object.keys(res.data.data).map((key) => {
-                    localStorage.setItem(String(key), res.data.data[key]);
-                });
+                updateUserDetails(res.data.data);
+                router.refresh();
             })
             .catch((error) => {
                 console.log(error);
             });
-            redirect("/admin/dashboard")
+        // redirect("/admin/dashboard")
     }
 
     return (

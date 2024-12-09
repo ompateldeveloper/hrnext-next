@@ -11,7 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import Link from "next/link";
 import { instance } from "@/lib/axios";
 import { useUserStore } from "@/store/userStore";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 const formSchema = z.object({
     email: z.string().email({
         message: "Please enter a valid email address.",
@@ -22,6 +22,8 @@ const formSchema = z.object({
 });
 
 export default function SignInForm() {
+    const router = useRouter();
+
     const updateUserDetails = useUserStore((state) => state.updateUserDetails);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -35,16 +37,14 @@ export default function SignInForm() {
         instance
             .post("http://localhost:4000/api/v2/auth/signin", formData, { withCredentials: true })
             .then((res) => {
-                Object.keys(res.data.data).map((key) => {
-                    // localStorage.setItem(String(key),res.data.data[key])
-                });
                 updateUserDetails(res.data.data);
                 console.log(res.data.data);
+
+                router.refresh();
             })
             .catch((error) => {
                 console.log(error);
             });
-        redirect("/admin/dashboard");
     }
 
     return (

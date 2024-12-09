@@ -7,6 +7,7 @@ import { redirect, usePathname, useRouter } from "next/navigation";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { useUserStore } from "@/store/userStore";
 import { instance } from "@/lib/axios";
+import Link from "next/link";
 
 const items = [
     {
@@ -44,17 +45,7 @@ const items = [
 export function AppSidebar() {
     const pathname = usePathname();
     const details = useUserStore();
-    const router = useRouter()
-    const handleLogout = () => {
-        instance.post('/api/v2/auth/logout')
-        .then(()=>{
-        })
-        .catch(()=>{
-            return
-        })
-        localStorage.clear();
-        redirect('/signin')
-    };
+
     return (
         <Sidebar>
             <SidebarHeader>Accentiqa Admin</SidebarHeader>
@@ -85,7 +76,9 @@ export function AppSidebar() {
                                 <Avatar>
                                     <AvatarImage src="https://github.com/ompateldeveloper.png" />
                                 </Avatar>
-                                <div className="capitalize truncate max-w-36">{details?.name}</div>
+                                <div className="capitalize truncate max-w-36">
+                                    {details?.fname} {details?.lname}
+                                </div>
                             </div>
                         </Button>
                     </PopoverTrigger>
@@ -95,7 +88,9 @@ export function AppSidebar() {
                                 <UserIcon className="w-5 h-5 text-muted-foreground" />
                                 <div>
                                     <p className="text-sm font-medium leading-none">Name</p>
-                                    <p className="text-sm text-muted-foreground">{details?.name}</p>
+                                    <p className="text-sm text-muted-foreground">
+                                        {details?.fname} {details?.lname}
+                                    </p>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-4">
@@ -106,12 +101,12 @@ export function AppSidebar() {
                                 </div>
                             </div>
                         </div>
-                        <form onSubmit={handleLogout}>
+                        <Link href="/logout">
                             <Button variant="destructive">
                                 <LogOut />
                                 Logout
                             </Button>
-                        </form>
+                        </Link>
                     </PopoverContent>
                 </Popover>
             </SidebarFooter>
