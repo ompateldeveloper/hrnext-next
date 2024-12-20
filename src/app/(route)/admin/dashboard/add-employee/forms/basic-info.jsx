@@ -71,7 +71,7 @@ export function BasicInfoForm() {
             <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid md:grid-cols-2 gap-4 ">
                             <FormField
                                 control={form.control}
                                 name="probationPeriod"

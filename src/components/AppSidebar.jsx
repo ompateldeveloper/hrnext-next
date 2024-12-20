@@ -1,55 +1,26 @@
 "use client";
-import { Calendar, Home, Inbox, LogOut, MailIcon, Search, Settings, TentTree, UserIcon, UserPlus, Users } from "lucide-react";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
+import { LogOut, LogsIcon, MailIcon, Newspaper, UserIcon } from "lucide-react";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { useUserStore } from "@/store/userStore";
-import { instance } from "@/lib/axios";
 import Link from "next/link";
-
-const items = [
-    {
-        title: "Home",
-        url: "/admin/dashboard/home",
-        icon: Home,
-    },
-    {
-        title: "Add Employee",
-        url: "/admin/dashboard/add-employee",
-        icon: UserPlus,
-    },
-    {
-        title: "View employees",
-        url: "/admin/dashboard/view-employees",
-        icon: Users,
-    },
-    {
-        title: "Calendar",
-        url: "/admin/dashboard/calendar",
-        icon: Calendar,
-    },
-    {
-        title: "Leave management",
-        url: "/admin/dashboard/leave-mgmt",
-        icon: TentTree,
-    },
-    {
-        title: "Settings",
-        url: "/admin/dashboard",
-        icon: Settings,
-    },
-];
-
-export function AppSidebar() {
+import { ModeToggle } from "./theme-toggle";
+import Image from "next/image";
+export function AppSidebar({ items }) {
     const pathname = usePathname();
     const details = useUserStore();
+    const { open } = useSidebar();
 
     return (
-        <Sidebar>
-            <SidebarHeader>Accentiqa Admin</SidebarHeader>
-            {/* <Separator /> */}
+        <Sidebar collapsible="icon">
+            <SidebarHeader>
+                <Link href="/" className="flex items-center gap-2">
+                    <Newspaper /> {open && "Accentiqa Dashboard"}
+                </Link>
+            </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupContent>
@@ -68,17 +39,19 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter>
+            <SidebarFooter className="p-1">
                 <Popover>
-                    <PopoverTrigger>
-                        <Button asChild variant="ghost" className="h-fit w-full">
-                            <div className="flex items-center gap-2 ">
-                                <Avatar>
-                                    <AvatarImage src="https://github.com/ompateldeveloper.png" />
-                                </Avatar>
-                                <div className="capitalize truncate max-w-36">
-                                    {details?.fname} {details?.lname}
+                    <PopoverTrigger >
+                        <Button asChild variant="ghost" className=" w-full ">
+                            <div className="">
+                                <div className="min-w-8 w-8 rounded-full overflow-hidden">
+                                    <img src="https://github.com/ompateldeveloper.png" alt="user" />
                                 </div>
+                                {open && (
+                                    <div className="capitalize truncate max-w-36">
+                                        {details?.fname} {details?.lname}
+                                    </div>
+                                )}
                             </div>
                         </Button>
                     </PopoverTrigger>
@@ -101,12 +74,15 @@ export function AppSidebar() {
                                 </div>
                             </div>
                         </div>
-                        <Link href="/logout">
-                            <Button variant="destructive">
-                                <LogOut />
-                                Logout
-                            </Button>
-                        </Link>
+                        <div className="flex items-center justify-between">
+                            <Link href="/logout">
+                                <Button variant="destructive">
+                                    <LogOut />
+                                    Logout
+                                </Button>
+                            </Link>
+                            <ModeToggle />
+                        </div>
                     </PopoverContent>
                 </Popover>
             </SidebarFooter>

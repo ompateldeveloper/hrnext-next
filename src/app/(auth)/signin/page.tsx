@@ -38,8 +38,6 @@ export default function SignInForm() {
             .post("http://localhost:4000/api/v2/auth/signin", formData, { withCredentials: true })
             .then((res) => {
                 updateUserDetails(res.data.data);
-                console.log(res.data.data);
-
                 router.refresh();
             })
             .catch((error) => {
@@ -49,7 +47,7 @@ export default function SignInForm() {
 
     return (
         <div className="flex min-h-screen justify-between">
-            <div className="flex items-center justify-center w-1/2 z-10 bg-white">
+            <div className="flex items-center justify-center w-1/2 z-10 bg-white dark:bg-primary-foreground">
                 <Card>
                     <CardHeader>
                         <CardTitle>Sign In</CardTitle>

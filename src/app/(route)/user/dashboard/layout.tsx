@@ -3,37 +3,32 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import React, { ReactNode } from "react";
 import { AppSidebar } from "@/components/AppSidebar";
 import Navbar from "@/components/Navbar";
-import { Calendar, Home, Settings, TentTree, UserPlus, Users } from "lucide-react";
+import { Calendar, Home, Info, Settings, TentTree } from "lucide-react";
 
 const items = [
     {
         title: "Home",
-        url: "/admin/dashboard/home",
+        url: "/user/dashboard/home",
         icon: Home,
     },
     {
-        title: "Add Employee",
-        url: "/admin/dashboard/add-employee",
-        icon: UserPlus,
-    },
-    {
-        title: "View employees",
-        url: "/admin/dashboard/view-employees",
-        icon: Users,
-    },
-    {
         title: "Calendar",
-        url: "/admin/dashboard/calendar",
+        url: "/user/dashboard/calendar",
         icon: Calendar,
     },
     {
+        title: "My Info",
+        url: "/user/dashboard/my-info",
+        icon: Info,
+    },
+    {
         title: "Leave management",
-        url: "/admin/dashboard/leave-mgmt",
+        url: "/user/dashboard/leave-mgmt",
         icon: TentTree,
     },
     {
         title: "Settings",
-        url: "/admin/dashboard/settings",
+        url: "/user/dashboard/settings",
         icon: Settings,
     },
 ];
@@ -44,9 +39,9 @@ export default function DashboardLayout({
 }>) {
     return (
         <SidebarProvider>
-            <AppSidebar items={items} />
+            <AppSidebar items={items}/>
             <div className="flex flex-col w-full">
-                <Navbar />
+                <Navbar />.
                 <main>{children}</main>
             </div>
         </SidebarProvider>

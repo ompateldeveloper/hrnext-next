@@ -34,7 +34,7 @@ export default function page() {
                 <CardContent>
                     <Form {...form}>
                         <form>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid md:grid-cols-2 gap-4">
                                 <FormField
                                     control={form.control}
                                     name="empSeries"

@@ -25,7 +25,6 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    // Token exists
     if (pathname.startsWith("/admin")) {
         if (!admin) {
             console.log("Attempted admin access by non-admin user");

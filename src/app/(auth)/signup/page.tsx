@@ -57,7 +57,7 @@ export default function SignInForm() {
 
     return (
         <div className="flex flex-row-reverse min-h-screen justify-between">
-            <div className="flex items-center justify-center w-1/2 z-10 bg-white">
+            <div className="flex items-center justify-center w-1/2 z-10 bg-white dark:bg-primary-foreground">
                 <Card>
                     <CardHeader>
                         <CardTitle>Sign Up</CardTitle>

@@ -23,3 +23,4 @@ const useUserStore = create(
 );
 
 export { useUserStore };
+export default useUserStore;
